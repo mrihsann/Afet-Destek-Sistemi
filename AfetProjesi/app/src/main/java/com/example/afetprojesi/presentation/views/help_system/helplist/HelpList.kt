@@ -30,6 +30,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.afetprojesi.presentation.views.general_ui.FilterChipFun
 
@@ -40,7 +41,7 @@ fun HelpList(onNavigateToHomePage: () -> Unit) {
     //filtreler kısmını açan butonunu aktifliği burada kontrol ediliyor.
     val selectedFilter = remember { mutableStateOf(false) }
 
-    //seçili filtreler burada tutuluyor
+    //seçili filtreler burada tutuluyor, seçilen filtrelere göre listeleme yapacağız.
     val selectedFilters = remember { mutableListOf<String>() }
 
     //filtre listesini api ile çekip buraya yazdıracağız. Burası sahte veri şuanlık
@@ -114,5 +115,13 @@ fun HelpList(onNavigateToHomePage: () -> Unit) {
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun prw(){
+    HelpList {
+
     }
 }

@@ -24,6 +24,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -34,19 +36,16 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
         Column(modifier = Modifier.fillMaxSize()) {
             OutlinedCard (modifier = Modifier
                 .fillMaxWidth()
-                .height(200.dp),colors = CardDefaults.cardColors(
-                containerColor = MaterialTheme.colorScheme.primary),
-                shape = RoundedCornerShape(topStart = 0.dp, topEnd = 0.dp, bottomStart = 50.dp, bottomEnd = 50.dp)
+                .height(150.dp),colors = CardDefaults.cardColors(
+                containerColor = Color(252, 163, 17)
+            ),
+                shape = RoundedCornerShape(0.dp)
             ){
-                Row {
-                    Column(modifier = Modifier.padding(top = 50.dp, start = 50.dp)) {
-                        Text(text = "Welcome", fontSize = 20.sp)
-                        Text(text = "İhsan", fontSize = 40.sp)
+                Row (modifier=Modifier.fillMaxSize()){
+                    Column(modifier = Modifier.padding(top = 50.dp, start = 50.dp), verticalArrangement =Arrangement.Center) {
+                        Text(text = "Welcome", fontSize = 24.sp, color = Color(229, 229, 229))
+                        Text(text = "Ömer Gayi", fontSize = 32.sp, color = Color(229, 229, 229))
                     }
-                    Spacer(modifier = Modifier.weight(1f))
-                    Image(imageVector = Icons.Default.Person, contentDescription = "", modifier = Modifier
-                        .padding(50.dp)
-                        .size(90.dp))
                 }
             }
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
@@ -60,13 +59,13 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .padding(5.dp)
                             .clickable { onNavigateToHelpForm() },
                             colors = CardDefaults.cardColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer),
+                            containerColor = Color(20, 33, 61)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Request", fontSize = 20.sp)
-                                Text(text = "for", fontSize = 15.sp)
-                                Text(text = "Help", fontSize = 20.sp)
+                                Text(text = "Request", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "for", fontSize = 15.sp, color = Color(229, 229, 229))
+                                Text(text = "Help", fontSize = 20.sp, color = Color(229, 229, 229))
                             }
                         }
                         OutlinedCard(modifier = Modifier
@@ -75,12 +74,12 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .padding(5.dp)
                             .clickable { onNavigateToHelpList() },
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                containerColor = Color(20, 33, 61)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Requirement", fontSize = 20.sp)
-                                Text(text = "List", fontSize = 20.sp)
+                                Text(text = "Requirement", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "List", fontSize = 20.sp, color = Color(229, 229, 229))
                             }
                         }
                     }
@@ -95,13 +94,13 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .padding(5.dp)
                             .clickable { onNavigateToHangerForm() },
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                containerColor = Color(20, 33, 61)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Load Product", fontSize = 20.sp)
-                                Text(text = "on", fontSize = 15.sp)
-                                Text(text = "Hanger", fontSize = 20.sp)
+                                Text(text = "Load Product", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "on", fontSize = 15.sp, color = Color(229, 229, 229))
+                                Text(text = "Hanger", fontSize = 20.sp, color = Color(229, 229, 229))
                             }
                         }
                         OutlinedCard(modifier = Modifier
@@ -111,13 +110,13 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .padding(5.dp)
                             .clickable { onNavigateToHangerList() },
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                containerColor = Color(20, 33, 61)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Look", fontSize = 20.sp)
-                                Text(text = "at the", fontSize = 15.sp)
-                                Text(text = "Hanger", fontSize = 20.sp)
+                                Text(text = "Look", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "at the", fontSize = 15.sp, color = Color(229, 229, 229))
+                                Text(text = "Hanger", fontSize = 20.sp, color = Color(229, 229, 229))
                             }
                         }
                     }
@@ -135,12 +134,12 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                                 onNavigateToReportWreckagePage()
                             },
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                containerColor = Color(20, 33, 61)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Report", fontSize = 20.sp)
-                                Text(text = "Wreckage", fontSize = 20.sp)
+                                Text(text = "Report", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Wreckage", fontSize = 20.sp, color = Color(229, 229, 229))
                             }
                         }
                         OutlinedCard(modifier = Modifier
@@ -152,13 +151,13 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                                 onNavigateToWreckageListPage()
                             },
                             colors = CardDefaults.cardColors(
-                                containerColor = MaterialTheme.colorScheme.primaryContainer),
+                                containerColor = Color(20, 33, 61)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Look", fontSize = 20.sp)
-                                Text(text = "at the", fontSize = 15.sp)
-                                Text(text = "Wreckage", fontSize = 20.sp)
+                                Text(text = "Look", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "at the", fontSize = 15.sp, color = Color(229, 229, 229))
+                                Text(text = "Wreckage", fontSize = 20.sp, color = Color(229, 229, 229))
                             }
                         }
                     }
@@ -167,3 +166,18 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
         }
     }
 }
+
+
+@Preview
+@Composable
+fun pre(){
+    HomePage(
+        onNavigateToHelpForm = { /*TODO*/ },
+        onNavigateToHelpList = { /*TODO*/ },
+        onNavigateToHangerForm = { /*TODO*/ },
+        onNavigateToHangerList = { /*TODO*/ },
+        onNavigateToReportWreckagePage = { /*TODO*/ }) {
+        
+    }
+}
+

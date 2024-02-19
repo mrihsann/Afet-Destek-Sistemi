@@ -150,7 +150,6 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
             targetState = currentPageIndex.intValue,
             transitionSpec = {
                 val animationSpec: TweenSpec<IntOffset> = tween(300)
-
                 val direction = getTransitionDirection(
                     initialIndex = if (isClickedDirection.value){ currentPageIndex.intValue - 1} else {
                         currentPageIndex.intValue +1
@@ -175,7 +174,9 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
                     PersonalInfoHelpPage(tc = tc, name = name, surname = surname,number=number,paddingValues=paddingValues)
                 }
                 1 -> {
-                    SelectCategoryPage(listCategory = listCategory,selectedCategoryList=selectedCategoryList, paddingValues=paddingValues)
+                    SelectCategoryPage(listCategory = listCategory,
+                        selectedCategoryList=selectedCategoryList,
+                        paddingValues=paddingValues)
                 }
                 2 -> {
                     DescriptionInfo(description = description, paddingValues = paddingValues)
@@ -199,7 +200,6 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
                     ) {
                         Spacer(Modifier.height(32.dp))
                         QuestionTitle(title = "404 Not Found")
-                        Spacer(Modifier.height(18.dp))
                     }
                 }
             }

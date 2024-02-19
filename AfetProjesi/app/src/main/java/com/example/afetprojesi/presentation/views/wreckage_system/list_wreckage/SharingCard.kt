@@ -36,7 +36,7 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.afetprojesi.R
-import com.example.afetprojesi.presentation.views.hanger_system.detail_hanger_form.ImageCardDetail
+import com.example.afetprojesi.presentation.views.hanger_system.detail_hanger.ImageCardDetail
 
 @Composable
 fun SharingCard() {
@@ -126,7 +126,7 @@ fun SharingCard() {
                     .clip(MaterialTheme.shapes.medium))
             }
             Spacer(modifier = Modifier.height(16.dp))
-            Row {
+            Row (verticalAlignment = Alignment.CenterVertically){
                 Text(text = "Malatya Battalgazi", textDecoration = TextDecoration.Underline)
                 Spacer(modifier = Modifier.weight(1f))
                 OutlinedCard(colors = CardDefaults.cardColors(MaterialTheme.colorScheme.primaryContainer)) {
@@ -142,7 +142,7 @@ fun SharingCard() {
 }
 
 
-@Preview(showBackground = true)
+@Preview
 @Composable
 fun TweetCardPreview() {
 

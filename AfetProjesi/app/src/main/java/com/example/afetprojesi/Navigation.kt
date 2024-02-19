@@ -9,12 +9,12 @@ import com.example.afetprojesi.presentation.views.help_system.helplist.HelpList
 import com.example.afetprojesi.presentation.views.home_page.HomePage
 import com.example.afetprojesi.presentation.views.hanger_system.list_hanger.HangerList
 import com.example.afetprojesi.presentation.views.hanger_system.add_to_hanger.HangerForm
-import com.example.afetprojesi.presentation.views.hanger_system.detail_hanger_form.DetailHangerForm
+import com.example.afetprojesi.presentation.views.wreckage_system.detail_wreckage.DetailWreckage
 import com.example.afetprojesi.presentation.views.wreckage_system.list_wreckage.ListOfWreckages
 import com.example.afetprojesi.presentation.views.wreckage_system.report_wreckage.ReportWreckageScreen
 
 @Composable
-fun NavigationApp(){
+fun Navigation(){
 
     val navController = rememberNavController()
 
