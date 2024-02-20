@@ -16,17 +16,17 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 
 @Composable
 fun DialogWithImage(
-
+    onDismissRequest: MutableState<Boolean>
 ) {
-    Dialog({}) {
+    Dialog({ onDismissRequest.value }) {
         // Draw a rectangle shape with rounded corners inside the dialog
         Card(
             modifier = Modifier
@@ -47,10 +47,18 @@ fun DialogWithImage(
                     modifier = Modifier
                         .size(100.dp)
                 )
-                Text(
-                    text = "Tap anywhere on the screen to turn off the alarm.",
-                    modifier = Modifier.padding(16.dp),
-                )
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                ) {
+                    TextButton(
+                        onClick = { onDismissRequest.value=false },
+                        modifier = Modifier.padding(8.dp),
+                    ) {
+                        Text("Close Alert")
+                    }
+                }
             }
         }
     }

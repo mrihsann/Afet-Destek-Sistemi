@@ -35,12 +35,12 @@ import com.example.afetprojesi.presentation.views.general_ui.DialogWithImage
 
 @Composable
 fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,onNavigateToHangerForm: () -> Unit,onNavigateToHangerList: () -> Unit,onNavigateToReportWreckagePage: () -> Unit,onNavigateToWreckageListPage: () -> Unit){
-    val openAlertDialog = remember { mutableStateOf(true) }
+    val openAlertDialog = remember { mutableStateOf(false) }
 
     Surface(color = Color(254,250,224)) {
         when {
             openAlertDialog.value -> {
-                DialogWithImage()
+                DialogWithImage( openAlertDialog )
             }
         }
         Column(modifier = Modifier.fillMaxSize()) {
@@ -185,7 +185,7 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .weight(1f)
                             .padding(5.dp)
                             .clickable {
-
+                                openAlertDialog.value=true
                             },
                             colors = CardDefaults.cardColors(
                                 containerColor = Color(96,108,56)),
