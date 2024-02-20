@@ -43,22 +43,18 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun SupportHelpCard() {
-    //ilanın resimleri apiden çekilip buraya eklenecek.
-    val images = remember { mutableListOf(
-        android.R.drawable.ic_delete,
-        android.R.drawable.btn_star_big_on
-    ) }
+fun SupportHelpCard(onNavigateToDetail:() -> Unit,images:MutableList<Int>,location:String,type:String,modifier: Modifier) {
     val pagerState = rememberPagerState(pageCount = { images.size })
 
-    Column {
+    Column(modifier){
         OutlinedCard(
             modifier = Modifier
                 .clip(RoundedCornerShape(2.dp)),
             colors = CardDefaults.cardColors(
                 containerColor = Color.White),
             border = BorderStroke((0.5).dp, Color.LightGray),
-            shape = RoundedCornerShape(20.dp)
+            shape = RoundedCornerShape(20.dp),
+            onClick = onNavigateToDetail
         ) {
             Box {
                 HorizontalPager(state = pagerState) { page ->
@@ -87,7 +83,7 @@ fun SupportHelpCard() {
                 ElevatedCard (modifier = Modifier
                     .align(Alignment.TopStart)
                     .padding(start = 10.dp, top = 10.dp)){
-                    Text(text = "Adana", modifier = Modifier.padding(horizontal = 8.dp), fontSize = 13.sp)
+                    Text(text = location, modifier = Modifier.padding(horizontal = 8.dp), fontSize = 13.sp)
                 }
 
 
@@ -115,14 +111,7 @@ fun SupportHelpCard() {
                 }
             }
         }
-        Text(text = "Ayakkabı", modifier = Modifier.fillMaxWidth().padding(10.dp), textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Color.DarkGray)
+        Text(text = type, modifier = Modifier.fillMaxWidth().padding(10.dp), textAlign = TextAlign.Center, fontSize = 15.sp, fontWeight = FontWeight.Bold, color = Color.DarkGray)
     }
 
-}
-
-
-@Preview
-@Composable
-fun prww(){
-    SupportHelpCard()
 }

@@ -1,6 +1,5 @@
-package com.example.afetprojesi.presentation.views.help_system.detail_request
+package com.example.afetprojesi.presentation.views.hanger_system.detail_hanger
 
-import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -22,12 +21,13 @@ import androidx.compose.material.icons.filled.Message
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Button
-import androidx.compose.material3.ButtonColors
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
@@ -35,18 +35,26 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.afetprojesi.R
 import com.example.afetprojesi.ui.theme.AfetProjesiTheme
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailRequest(onNavigateToPopBack:() -> Unit){
+fun DetailHanger(onNavigateToPopBack:() -> Unit){
 
+    //apiden çekilen resimler buraya eklenecek
+    val images=remember{ mutableListOf<Int>(
+        R.drawable.z
+    ) }
     Scaffold(
         topBar = {
             CenterAlignedTopAppBar(
@@ -104,55 +112,43 @@ fun DetailRequest(onNavigateToPopBack:() -> Unit){
     ){
         Column (modifier = Modifier
             .padding(it)
-            .padding(horizontal = 30.dp)
+            .padding(20.dp)
             .verticalScroll(rememberScrollState())) {
+            ImageCardDetail(
+                images, modifier = Modifier
+                    .clip(RoundedCornerShape(2.dp))
+                    .fillMaxWidth()
+                    .height(400.dp)
+            )
 
             Spacer(modifier = Modifier.height(15.dp))
-
-            Text(text = "Emily Johnson", fontSize = 25.sp, fontWeight = FontWeight.Bold)
+            Text(text = "Scarf", fontSize = 25.sp, fontWeight = FontWeight.Bold)
+            Spacer(modifier = Modifier.height(5.dp))
+            Text(
+                text ="I have enough scarves for 50 people. I can deliver it to people in Kahramanmaraş. You can reach me by sending a message or calling.", fontSize = 20.sp, color = Color.Gray
+            )
             Spacer(modifier = Modifier.height(15.dp))
-            OutlinedCard {
-                Text(
-                    text ="Hello, our home was damaged due to the earthquake and we need diapers and milk for our children. Can you help?"
-                    , fontSize = 20.sp, color = Color.DarkGray,modifier=Modifier.padding(10.dp)
-                )
+            Row (modifier = Modifier.fillMaxWidth()){
+                OutlinedCard {
+                    Text(text = "Kahramanmaraş", fontSize = 20.sp, modifier = Modifier.padding(5.dp))
+                }
+                Spacer(modifier = Modifier.width(10.dp))
+                Spacer(modifier = Modifier.weight(1f))
+                OutlinedCard (colors = CardDefaults.cardColors(Color(254,250,224))){
+                    Text(text = "Clothes", fontSize = 20.sp, modifier = Modifier.padding(5.dp))
+                }
             }
 
-            Spacer(modifier = Modifier.height(20.dp))
-            Row(modifier = Modifier
-                .fillMaxWidth()
-                .horizontalScroll(rememberScrollState())
-            ){
-                OutlinedCard {
-                    Text(text = "Adana", fontSize = 15.sp, modifier = Modifier.padding(5.dp))
-                }
-                Spacer(modifier = Modifier.width(10.dp))
-                OutlinedCard {
-                    Text(text = "Seyhan", fontSize = 15.sp,modifier = Modifier.padding(5.dp))
-                }
-                Spacer(modifier = Modifier.width(10.dp))
-                OutlinedCard {
-                    Text(text = "Denizli", fontSize = 15.sp,modifier = Modifier.padding(5.dp))
-                }
-                Spacer(modifier = Modifier.width(10.dp))
-                OutlinedCard {
-                    Text(text = "İsmetpaşa", fontSize = 15.sp,modifier = Modifier.padding(5.dp))
-                }
-            }
-            Spacer(modifier = Modifier.height(20.dp))
-
-            OutlinedCard(modifier = Modifier.fillMaxWidth()) {
-                Text(text = "Location Not :", modifier = Modifier.padding(10.dp))
-                Text(text = "We are staying in container tent number 8, located next to the children's playground.", modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 10.dp), fontSize = 18.sp, color = Color.DarkGray)
-            }
         }
     }
 }
+
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     AfetProjesiTheme {
-        DetailRequest({""})
+        DetailHanger({})
     }
 }

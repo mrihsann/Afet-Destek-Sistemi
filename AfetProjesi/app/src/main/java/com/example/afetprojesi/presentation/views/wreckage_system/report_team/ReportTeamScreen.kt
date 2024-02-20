@@ -1,6 +1,5 @@
-package com.example.afetprojesi.presentation.views.hanger_system.add_to_hanger
+package com.example.afetprojesi.presentation.views.wreckage_system.report_team
 
-import android.net.Uri
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.tween
@@ -14,77 +13,62 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableIntStateOf
-import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.example.afetprojesi.presentation.views.general_ui.DescriptionInfo
+import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
+import com.example.afetprojesi.presentation.views.hanger_system.add_to_hanger.PersonalInfo
 import com.example.afetprojesi.presentation.views.general_ui.SurveyBottomBar
 import com.example.afetprojesi.presentation.views.general_ui.SurveyTopBar
-import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
-import com.example.afetprojesi.presentation.views.general_ui.SelectCategoryPage
 import com.example.afetprojesi.util.getTransitionDirection
 
-@Composable
-fun HangerForm(
-    onNavigateToHomePage: () -> Unit
-) {
 
-    // sayfa geçişlerinde, bulunduğumuz sayfanın index bilgisini burada tutuyoruz.
+@Composable
+fun ReportTeamScreen() {
+
+    // Sayfa değişimi için bir state değişkeni tanımlayalım
     val currentPageIndex = remember { mutableIntStateOf(0) }
-    // Sayfalar arası geçişte efekt uygularken, hangi sayfaya yönlendirme olacağını burada ayarlıyoruz.
+
+    // Yönlendirme butonlarında hangisine tıklandığını kontrol ediyoruz
     val isClickedDirection = remember { mutableStateOf(false) }
+
     // Next butonunun etkin olup olmadığını takip eden değişken.
     val isNextButtonEnabled = remember { mutableStateOf(true) }
+
     // Previous butonunun gösterilip gösterilmeyeceğini takip eden değişken.
-    val shouldShowPreviousButton = remember { mutableStateOf(false) }
+    val shouldShowPreviousButton = remember { mutableStateOf(true) }
+
     // Done butonunun gösterilip gösterilmeyeceğini takip eden değişken.
     val shouldShowDoneButton = remember { mutableStateOf(false) }
+
     // Done butonunun etkin olup olmadığını takip eden değişken.
     val isDoneButtonEnabled = remember { mutableStateOf(false) }
 
-
-    //sayfalardan topladığımız veriler burada
-    val selectedCategoryList = remember { mutableStateListOf<String>() }
-    val selectedImageUris = remember { mutableStateOf<List<Uri>>(emptyList()) }
-    val title = remember { mutableStateOf("") }
+    //Sayfalardan gelen veriler burada tutuluyor
     val description = remember { mutableStateOf("") }
-    val city = remember { mutableStateOf("") }
-    val district= remember { mutableStateOf("") }
+    val tc = remember { mutableStateOf("") }
     val name = remember { mutableStateOf("") }
     val surname= remember { mutableStateOf("") }
-    val phoneNumber= remember { mutableStateOf("") }
-
-    //apiden çektiğimiz kategorileri buraya ekleyeceğiz
-    val listCategory = remember{ mutableListOf(
-        "Clothing",
-        "Food",
-        "Drink",
-        "Help Team",
-        "Place to Stay",
-        "Psychosocial Support",
-        "Special Support") }
-
+    val number= remember { mutableStateOf("") }
 
     isDoneButtonEnabled.value =
-        !(selectedCategoryList.isEmpty() or
-                selectedImageUris.value.isEmpty() or
-                title.value.isEmpty() or
-                description.value.isEmpty() or
-                city.value.isEmpty() or
-                district.value.isEmpty() or
+        !(description.value.isEmpty() or
                 name.value.isEmpty() or
                 surname.value.isEmpty() or
-                phoneNumber.value.isEmpty())
+                number.value.isEmpty() or
+                tc.value.isEmpty())
 
 
     Scaffold(
         topBar = {
             SurveyTopBar(
                 questionIndex = currentPageIndex.intValue,
-                totalQuestionsCount = 5,
-                onClosePressed = onNavigateToHomePage,
+                totalQuestionsCount = 2,
+                onClosePressed = {/* buraya enkaz listesi sayfasına giden fonksiyon gelecek */},
             )
         },
         bottomBar = {
@@ -102,39 +86,39 @@ fun HangerForm(
                     if (currentPageIndex.intValue < 1) {
                         shouldShowPreviousButton.value = false
                     }
-                    // Eğer mevcut sayfa indeksi 4 değilse:
-                    if (currentPageIndex.intValue != 4) {
-                        // Next butonunu etkinleştir ve done butonunu gizle.
+                    // Eğer mevcut sayfa indeksi 3 değilse:
+                    if (currentPageIndex.intValue !=1) {
+                        // Bir sonraki butonu etkinleştir ve tamamlama butonunu gizle.
                         isNextButtonEnabled.value = true
                         shouldShowDoneButton.value = false
                     }
-                    //sayfa geçiş değişkenini false yap
+                    // Yönlendirme butonuna tıklama durumunu false yapar
                     isClickedDirection.value = false
-
                 },
                 onNextPressed = {
-                    // Eğer mevcut sayfa indeksi -1 ile 4 arasındaysa:
-                    if ((currentPageIndex.intValue > -1) and (currentPageIndex.intValue < 4)) {
+                    // Eğer mevcut sayfa indeksi -1 ile 3 arasındaysa:
+                    if ((currentPageIndex.intValue > -1) and (currentPageIndex.intValue < 1)) {
                         // Mevcut sayfa indeksini bir artır ve önceki butonu göster.
                         currentPageIndex.intValue = currentPageIndex.intValue + 1
                         shouldShowPreviousButton.value = true
                     }
-                    // Eğer mevcut sayfa indeksi 4 ise:
-                    if (currentPageIndex.intValue == 4) {
+                    // Eğer mevcut sayfa indeksi 3 ise:
+                    if (currentPageIndex.intValue == 1) {
                         // Bir sonraki butonu devre dışı bırak ve tamamlama butonunu göster.
                         isNextButtonEnabled.value = false
                         shouldShowDoneButton.value = true
                     }
-                    //sayfa geçiş değişkenini true yap
+                    // Yönlendirme butonuna tıklama durumunu true yapar.
                     isClickedDirection.value = true
+
                 },
                 onDonePressed = {
-                    //ilanı tamamlama butonuna tıklandığı zaman yapılacak işlemler burada olacak.
+                    //Done butonuna tıklanınca yapılacak işlemler buraya
                 }
             )
         }
     ){ paddingValues ->
-        //sayfa geçişlerinin animasyonlu olması için
+        //geçişli sayfa animasyonu için
         AnimatedContent(
             targetState = currentPageIndex.intValue,
             transitionSpec = {
@@ -156,23 +140,15 @@ fun HangerForm(
                     animationSpec = animationSpec
                 )
             },
-            label = "ScreenDataAnimation"
+            label = "surveyScreenDataAnimation"
         ){ animatedContentScope ->
             when (animatedContentScope) {
                 0 -> {
-                    SelectCategoryPage(listCategory = listCategory,selectedCategoryList=selectedCategoryList, paddingValues=paddingValues)
+                    PersonalInfo(name,surname,number,paddingValues)
                 }
+
                 1 -> {
-                    PhotoPicker(selectedImageUris,paddingValues)
-                }
-                2 -> {
-                    AboutItem(title,description,paddingValues)
-                }
-                3 -> {
-                    Location(city,district,paddingValues)
-                }
-                4 -> {
-                    PersonalInfo(name,surname,phoneNumber,paddingValues)
+                    DescriptionInfo(description, paddingValues)
                 }
                 else -> {
                     Column(
@@ -183,6 +159,7 @@ fun HangerForm(
                     ) {
                         Spacer(Modifier.height(32.dp))
                         QuestionTitle(title = "404 Not Found")
+                        Spacer(Modifier.height(18.dp))
                     }
                 }
             }
@@ -190,3 +167,8 @@ fun HangerForm(
     }
 }
 
+@Preview
+@Composable
+fun preview(){
+    ReportTeamScreen()
+}

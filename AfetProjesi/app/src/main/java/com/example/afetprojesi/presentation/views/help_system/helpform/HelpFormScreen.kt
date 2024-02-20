@@ -70,21 +70,13 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
                 locationNot.value.isEmpty())
     //kategori listesini api ile çekip buraya yazdıracağız. Burası sahte veri şuanlık
     val listCategory = remember{ mutableListOf(
-        "Giyim",
-        "Yiyecek",
-        "İçecek",
-        "Ekip",
-        "Aksesuar",
-        "Giyim",
-        "Yiyecek",
-        "İçecek",
-        "Ekip",
-        "Aksesuar",
-        "Giyim",
-        "Yiyecek",
-        "İçecek",
-        "Ekip",
-        "Aksesuar") }
+        "Clothing",
+        "Food",
+        "Drink",
+        "Help Team",
+        "Place to Stay",
+        "Psychosocial Support",
+        "Special Support") }
 
     Scaffold(
         topBar = {

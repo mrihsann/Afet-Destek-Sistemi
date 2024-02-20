@@ -17,6 +17,7 @@ import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.afetprojesi.presentation.views.general_ui.DescriptionInfo
@@ -197,5 +198,13 @@ fun ReportWreckageScreen(
                 }
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun pre(){
+    ReportWreckageScreen {
+
     }
 }
