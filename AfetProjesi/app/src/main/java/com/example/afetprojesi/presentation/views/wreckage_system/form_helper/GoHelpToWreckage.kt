@@ -19,6 +19,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
 import com.example.afetprojesi.presentation.views.general_ui.DescriptionInfo
+import com.example.afetprojesi.presentation.views.general_ui.ErrorFormPage
 import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
 import com.example.afetprojesi.presentation.views.hook_assistance_system.form.PersonalInfo
 import com.example.afetprojesi.presentation.views.general_ui.SurveyBottomBar
@@ -149,16 +150,7 @@ fun GoHelpToWreckage() {
                     DescriptionInfo(description, paddingValues)
                 }
                 else -> {
-                    Column(
-                        modifier = Modifier
-                            .padding(paddingValues)
-                            .padding(horizontal = 16.dp)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        Spacer(Modifier.height(32.dp))
-                        QuestionTitle(title = "404 Not Found")
-                        Spacer(Modifier.height(18.dp))
-                    }
+                    ErrorFormPage(paddingValues)
                 }
             }
         }

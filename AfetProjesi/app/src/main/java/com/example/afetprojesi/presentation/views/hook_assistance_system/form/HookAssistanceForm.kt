@@ -20,6 +20,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import com.example.afetprojesi.presentation.views.general_ui.ErrorFormPage
 import com.example.afetprojesi.presentation.views.general_ui.SurveyBottomBar
 import com.example.afetprojesi.presentation.views.general_ui.SurveyTopBar
 import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
@@ -168,15 +169,7 @@ fun HookAssistanceForm(
                     PersonalInfo(name,surname,phoneNumber,paddingValues)
                 }
                 else -> {
-                    Column(
-                        modifier = Modifier
-                            .padding(paddingValues)
-                            .padding(horizontal = 16.dp)
-                            .verticalScroll(rememberScrollState())
-                    ) {
-                        Spacer(Modifier.height(32.dp))
-                        QuestionTitle(title = "404 Not Found")
-                    }
+                    ErrorFormPage(paddingValues = paddingValues)
                 }
             }
         }
