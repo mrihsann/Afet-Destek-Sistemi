@@ -32,14 +32,14 @@ fun ChoiceCategoryCard(text:String, selectedList: MutableList<String>){
     Surface(
         shape = MaterialTheme.shapes.small,
         color = if (selected) {
-            Color(254,250,224)
+            Color(0, 0, 0, 25)
         } else {
             MaterialTheme.colorScheme.surface
         },
         border = BorderStroke(
             width = 1.dp,
             color = if (selected) {
-                Color(96,108,56)
+                Color(0xFF282828)
             } else {
                 MaterialTheme.colorScheme.outline
             }

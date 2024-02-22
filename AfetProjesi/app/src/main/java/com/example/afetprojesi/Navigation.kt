@@ -4,16 +4,16 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.afetprojesi.presentation.views.help_system.helpform.HelpFormScreen
-import com.example.afetprojesi.presentation.views.help_system.helplist.HelpList
+import com.example.afetprojesi.presentation.views.help_system.form.HelpFormScreen
+import com.example.afetprojesi.presentation.views.help_system.list.HelpList
 import com.example.afetprojesi.presentation.views.home_page.HomePage
-import com.example.afetprojesi.presentation.views.hanger_system.list_hanger.HangerList
-import com.example.afetprojesi.presentation.views.hanger_system.add_to_hanger.HangerForm
-import com.example.afetprojesi.presentation.views.hanger_system.detail_hanger.DetailHanger
-import com.example.afetprojesi.presentation.views.help_system.detail_request.DetailRequest
-import com.example.afetprojesi.presentation.views.wreckage_system.detail_wreckage.DetailWreckage
-import com.example.afetprojesi.presentation.views.wreckage_system.list_wreckage.ListOfWreckages
-import com.example.afetprojesi.presentation.views.wreckage_system.report_wreckage.ReportWreckageScreen
+import com.example.afetprojesi.presentation.views.hook_assistance_system.list.HookAssistance
+import com.example.afetprojesi.presentation.views.hook_assistance_system.form.HookAssistanceForm
+import com.example.afetprojesi.presentation.views.hook_assistance_system.detail.DetailPage
+import com.example.afetprojesi.presentation.views.help_system.detail.DetailRequest
+import com.example.afetprojesi.presentation.views.wreckage_system.detail.DetailWreckage
+import com.example.afetprojesi.presentation.views.wreckage_system.list.ListOfWreckages
+import com.example.afetprojesi.presentation.views.wreckage_system.form.ReportWreckageScreen
 
 @Composable
 fun Navigation(){
@@ -21,13 +21,13 @@ fun Navigation(){
     val navController = rememberNavController()
 
     NavHost(navController = navController, startDestination = "home_page") {
-        composable("home_page") { HomePage(onNavigateToHelpForm = { navController.navigate("help_form") }, onNavigateToHelpList = { navController.navigate("help_list") }, onNavigateToHangerForm = { navController.navigate("hanger_form") }, onNavigateToHangerList = { navController.navigate("hanger_list") },onNavigateToReportWreckagePage = {navController.navigate("wreckage_form")},onNavigateToWreckageListPage = {navController.navigate("wreckage_list")}) }
+        composable("home_page") { HomePage(onNavigateToHelpForm = { navController.navigate("help_form") }, onNavigateToHelpList = { navController.navigate("help_list") }, onNavigateToHookAssistanceForm = { navController.navigate("hanger_form") }, onNavigateToHookAssistance = { navController.navigate("hanger_list") },onNavigateToReportWreckage = {navController.navigate("wreckage_form")},onNavigateToWreckageList = {navController.navigate("wreckage_list")}) }
         composable("help_form") { HelpFormScreen(onNavigateToHomePage = { navController.navigate("home_page") }) }
         composable("help_detail") { DetailRequest(onNavigateToPopBack = {navController.popBackStack()}) }
-        composable("help_list") { HelpList(onNavigateToHomePage = { navController.navigate("home_page") }, onNavigateToDetail = {navController.navigate("help_detail")}) }
-        composable("hanger_list") { HangerList(onNavigateToHomePage = { navController.navigate("home_page") }, onNavigateToDetail={navController.navigate("hanger_detail")} ) }
-        composable("hanger_detail") { DetailHanger(onNavigateToPopBack = {navController.popBackStack()})}
-        composable("hanger_form") { HangerForm(onNavigateToHomePage = { navController.navigate("home_page") }) }
+        composable("help_list") { HelpList(onNavigateToHomePage = { navController.navigate("home_page") }, onNavigateToDetail = {navController.navigate("help_detail")}, onNavigateToHelpForm = {navController.navigate("help_form")}) }
+        composable("hanger_list") { HookAssistance(onNavigateToHomePage = { navController.navigate("home_page") }, onNavigateToDetail={navController.navigate("hanger_detail")}, onNavigateToForm = {navController.navigate("hanger_form")} ) }
+        composable("hanger_detail") { DetailPage(onNavigateToPopBack = {navController.popBackStack()})}
+        composable("hanger_form") { HookAssistanceForm(onNavigateToHomePage = { navController.navigate("home_page") }) }
         composable("wreckage_form") { ReportWreckageScreen(onNavigateToHomePage = { navController.navigate("home_page") }) }
         composable("wreckage_report_team") { ReportWreckageScreen(onNavigateToHomePage = { navController.popBackStack() }) }
         composable("wreckage_detail") { DetailWreckage(onNavigateToPopBack = {navController.popBackStack()}, onNavigateToReportTeam = {navController.navigate("wreckage_report_team")})}

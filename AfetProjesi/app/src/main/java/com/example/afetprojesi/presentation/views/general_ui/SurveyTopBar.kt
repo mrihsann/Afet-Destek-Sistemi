@@ -22,7 +22,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 
-//ilan yükleme sayfasında ki üst bar
+//form sayfasında ki üst bar
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SurveyTopBar(
@@ -63,7 +63,7 @@ fun SurveyTopBar(
                 .fillMaxWidth()
                 .padding(horizontal = 20.dp),
             trackColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f),
-            color= Color(96,108,56)
+            color=   Color(0xFF282828)
         )
     }
 }

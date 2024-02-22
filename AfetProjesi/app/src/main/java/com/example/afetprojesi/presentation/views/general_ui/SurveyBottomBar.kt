@@ -23,7 +23,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 
 
-//ilan yükleme sayfasında ki alt bar
+//form sayfasında ki alt bar
 @Composable
 fun SurveyBottomBar(
     shouldShowPreviousButton: Boolean,
@@ -47,9 +47,9 @@ fun SurveyBottomBar(
                         .weight(1f)
                         .height(48.dp),
                     onClick =onPreviousPressed,
-                    border = BorderStroke(1.dp,Color(96,108,56))
+                    border = BorderStroke(1.dp, Color(0xFF282828))
                 ) {
-                    Text(text = "Previous", color = Color(40,54,24))
+                    Text(text = "Previous", color =  Color(0xFF282828))
                 }
                 Spacer(modifier = Modifier.width(16.dp))
             }
@@ -60,7 +60,7 @@ fun SurveyBottomBar(
                         .height(48.dp),
                     onClick = onDonePressed,
                     enabled = isDoneButtonEnabled,
-                    colors = ButtonDefaults.buttonColors(Color(96,108,56))
+                    colors = ButtonDefaults.buttonColors( Color(0xFF282828))
                 ) {
                     Text(text = "Done")
                 }
@@ -71,7 +71,7 @@ fun SurveyBottomBar(
                         .height(48.dp),
                     onClick = onNextPressed,
                     enabled = isNextButtonEnabled,
-                    colors = ButtonDefaults.buttonColors(Color(96,108,56))
+                    colors = ButtonDefaults.buttonColors( Color(0xFF282828))
 
                 ) {
                     Text(text = "Next")

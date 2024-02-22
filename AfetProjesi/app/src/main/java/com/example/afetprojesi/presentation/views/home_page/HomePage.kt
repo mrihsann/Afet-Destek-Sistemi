@@ -27,20 +27,19 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.afetprojesi.presentation.views.general_ui.DialogWithImage
+import com.example.afetprojesi.presentation.views.general_ui.AlertDialog
 
 
 @Composable
-fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,onNavigateToHangerForm: () -> Unit,onNavigateToHangerList: () -> Unit,onNavigateToReportWreckagePage: () -> Unit,onNavigateToWreckageListPage: () -> Unit){
+fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit, onNavigateToHookAssistanceForm: () -> Unit, onNavigateToHookAssistance: () -> Unit, onNavigateToReportWreckage: () -> Unit, onNavigateToWreckageList: () -> Unit){
     val openAlertDialog = remember { mutableStateOf(false) }
 
-    Surface(color = Color(254,250,224)) {
+    Surface {
         when {
             openAlertDialog.value -> {
-                DialogWithImage( openAlertDialog )
+                AlertDialog( openAlertDialog )
             }
         }
         Column(modifier = Modifier.fillMaxSize()) {
@@ -48,8 +47,8 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
             OutlinedCard (modifier = Modifier
                 .fillMaxWidth()
                 .height(180.dp),colors = CardDefaults.cardColors(
-                containerColor = Color(40,54,24),
-                    contentColor = Color(254,250,224)
+                containerColor = Color(0xFF282828),
+                    contentColor = Color.White
             ),
                 shape = RoundedCornerShape(bottomStart = 50.dp, bottomEnd = 50.dp)
             ){
@@ -71,13 +70,13 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .padding(5.dp)
                             .clickable { onNavigateToHelpForm() },
                             colors = CardDefaults.cardColors(
-                            containerColor = Color(96,108,56)),
+                            containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Request", fontSize = 20.sp, color = Color(229, 229, 229))
-                                Text(text = "for", fontSize = 15.sp, color = Color(229, 229, 229))
-                                Text(text = "Help", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Request", fontSize = 20.sp, color = Color.White)
+                                Text(text = "for", fontSize = 15.sp, color = Color.White)
+                                Text(text = "Help", fontSize = 20.sp, color = Color.White)
                             }
                         }
                         Spacer(modifier = Modifier.width(10.dp))
@@ -87,12 +86,12 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .padding(5.dp)
                             .clickable { onNavigateToHelpList() },
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(96,108,56)),
+                                containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Requirement", fontSize = 20.sp, color = Color(229, 229, 229))
-                                Text(text = "List", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Requirement", fontSize = 20.sp, color = Color.White)
+                                Text(text = "List", fontSize = 20.sp, color = Color.White)
                             }
                         }
                     }
@@ -105,15 +104,16 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .height(120.dp)
                             .weight(1f)
                             .padding(5.dp)
-                            .clickable { onNavigateToHangerForm() },
+                            .clickable { onNavigateToHookAssistanceForm() },
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(96,108,56)),
+                                containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Hook Assistance", fontSize = 20.sp, color = Color(229, 229, 229))
-                                Text(text = "for", fontSize = 15.sp, color = Color(229, 229, 229))
-                                Text(text = "Helper", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Hook", fontSize = 18.sp, color = Color.White)
+                                Text(text = "Assistance", fontSize = 18.sp, color = Color.White)
+                                Text(text = "for", fontSize = 15.sp, color = Color.White)
+                                Text(text = "Helper", fontSize = 18.sp, color = Color.White)
                             }
                         }
                         Spacer(modifier = Modifier.width(10.dp))
@@ -123,14 +123,16 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .height(120.dp)
                             .weight(1f)
                             .padding(5.dp)
-                            .clickable { onNavigateToHangerList() },
+                            .clickable { onNavigateToHookAssistance() },
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(96,108,56)),
+                                containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Disasters", fontSize = 20.sp, color = Color(229, 229, 229))
-                                Text(text = "Victim", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Hook", fontSize = 18.sp, color = Color.White)
+                                Text(text = "Assistance", fontSize = 18.sp, color = Color.White)
+                                Text(text = "Disasters", fontSize = 18.sp, color = Color.White)
+                                Text(text = "Victim", fontSize = 18.sp, color = Color.White)
                             }
                         }
                     }
@@ -144,15 +146,15 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .weight(1f)
                             .padding(5.dp)
                             .clickable {
-                                onNavigateToReportWreckagePage()
+                                onNavigateToReportWreckage()
                             },
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(96,108,56)),
+                                containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Report", fontSize = 20.sp, color = Color(229, 229, 229))
-                                Text(text = "Wreckage", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Report", fontSize = 20.sp, color = Color.White)
+                                Text(text = "Wreckage", fontSize = 20.sp, color = Color.White)
                             }
                         }
                         Spacer(modifier = Modifier.width(10.dp))
@@ -163,15 +165,15 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                             .weight(1f)
                             .padding(5.dp)
                             .clickable {
-                                onNavigateToWreckageListPage()
+                                onNavigateToWreckageList()
                             },
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(96,108,56)),
+                                containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
-                                Text(text = "Wreckage", fontSize = 20.sp, color = Color(229, 229, 229))
-                                Text(text = "List", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Wreckage", fontSize = 20.sp, color = Color.White)
+                                Text(text = "List", fontSize = 20.sp, color = Color.White)
                             }
                         }
                     }
@@ -188,12 +190,12 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
                                 openAlertDialog.value=true
                             },
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(96,108,56)),
+                                containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Icon(imageVector = Icons.Default.AddAlert, contentDescription = "",Modifier.size(40.dp), tint = Color.White)
-                                Text(text = "S.O.S", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "S.O.S", fontSize = 20.sp, color = Color.White)
 
                             }
                         }
@@ -208,12 +210,12 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
 
                             },
                             colors = CardDefaults.cardColors(
-                                containerColor = Color(96,108,56)),
+                                containerColor = Color(0xFF282828)),
                             shape = RoundedCornerShape(5.dp)
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Icon(imageVector = Icons.Default.Mail, contentDescription = "",Modifier.size(40.dp), tint = Color.White)
-                                Text(text = "Send FeedBack", fontSize = 20.sp, color = Color(229, 229, 229))
+                                Text(text = "Send FeedBack", fontSize = 20.sp, color = Color.White)
                             }
                         }
                     }
@@ -222,18 +224,3 @@ fun HomePage(onNavigateToHelpForm: () -> Unit,onNavigateToHelpList: () -> Unit,o
         }
     }
 }
-
-
-@Preview
-@Composable
-fun pre(){
-    HomePage(
-        onNavigateToHelpForm = { /*TODO*/ },
-        onNavigateToHelpList = { /*TODO*/ },
-        onNavigateToHangerForm = { /*TODO*/ },
-        onNavigateToHangerList = { /*TODO*/ },
-        onNavigateToReportWreckagePage = { /*TODO*/ }) {
-        
-    }
-}
-
