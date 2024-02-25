@@ -1,8 +1,6 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
-    kotlin("kapt")
-    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -54,17 +52,14 @@ android {
 dependencies {
 
     implementation("com.squareup.retrofit2:retrofit:2.1.0")
-    implementation("com.google.code.gson:gson:2.6.1")
+    implementation("com.google.code.gson:gson:2.10")
     implementation("com.squareup.retrofit2:converter-gson:2.1.0")
 
 
     implementation("androidx.navigation:navigation-compose:2.7.7")
-    implementation("androidx.compose.runtime:runtime-livedata:1.6.1")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.2")
 
-
-
-
-    implementation ("androidx.compose.material:material-icons-extended:1.6.0")
+    implementation ("androidx.compose.material:material-icons-extended:1.6.1")
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("androidx.activity:activity-compose:1.8.2")
@@ -82,14 +77,5 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("io.coil-kt:coil-compose:2.5.0")
-    implementation("com.github.tfaki:CountryCP:1.0.5")
     implementation("androidx.navigation:navigation-compose:2.7.6")
-
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
-}
-
-// Allow references to generated code
-kapt {
-    correctErrorTypes = true
 }

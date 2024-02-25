@@ -14,11 +14,9 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.afetprojesi.presentation.views.help_system.list.HelpList
 import com.example.afetprojesi.ui.theme.AfetProjesiTheme
 import com.example.afetprojesi.viewModels.category.CategoryByIdViewModel
-import com.example.afetprojesi.viewModels.category.CategoryListViewModel
-import dagger.hilt.android.AndroidEntryPoint
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
