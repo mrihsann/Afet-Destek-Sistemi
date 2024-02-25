@@ -1,10 +1,10 @@
-package com.example.afetprojesi.dtos.responses.request
+package com.example.afetprojesi.dtos.responses.help_system
 
-import com.example.afetprojesi.dtos.requests.request.Status
+import com.example.afetprojesi.dtos.enum_class.Status
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class RequestResponseDto(
+data class HelpRequestResponseDto(
     @Expose
     @SerializedName("tc")
     var tc : String,

@@ -1,8 +1,8 @@
 package com.example.afetprojesi.service.clients
 
 import com.example.afetprojesi.service.category.ICategoryService
-import com.example.afetprojesi.service.debrisHelp.IDebrisHelpService
-import com.example.afetprojesi.service.request.IRequestService
+import com.example.afetprojesi.service.wreckage_help.IWreckageHelpService
+import com.example.afetprojesi.service.help_request.IHelpRequestService
 
 class ApiUtils {
     companion object{
@@ -12,12 +12,12 @@ class ApiUtils {
         fun getCategoryService() : ICategoryService{
             return RetrofitClient.getClient(BASE_URL).create(ICategoryService::class.java)
         }
-        fun getRequestService() : IRequestService{
-            return RetrofitClient.getClient(BASE_URL).create(IRequestService::class.java)
+        fun getRequestService() : IHelpRequestService{
+            return RetrofitClient.getClient(BASE_URL).create(IHelpRequestService::class.java)
         }
 
-        fun getDebrisHelpService(): IDebrisHelpService {
-            return RetrofitClient.getClient(BASE_URL).create(IDebrisHelpService::class.java)
+        fun getDebrisHelpService(): IWreckageHelpService {
+            return RetrofitClient.getClient(BASE_URL).create(IWreckageHelpService::class.java)
         }
 
         /*        fun getReportingDebrisService() : IReportingDebrisService{

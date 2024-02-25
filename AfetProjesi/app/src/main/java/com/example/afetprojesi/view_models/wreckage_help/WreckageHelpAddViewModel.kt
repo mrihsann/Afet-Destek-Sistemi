@@ -1,8 +1,8 @@
-package com.example.afetprojesi.viewModels.debrisHelp
+package com.example.afetprojesi.view_models.wreckage_help
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.afetprojesi.dtos.requests.debrisHelp.DebrisHelpDto
+import com.example.afetprojesi.dtos.requests.wreckage_help.WreckageHelpDto
 import com.example.afetprojesi.dtos.results.ValidationExceptionResult
 import com.google.gson.Gson
 import retrofit2.Call
@@ -11,14 +11,14 @@ import retrofit2.Response
 import com.example.afetprojesi.dtos.results.Result
 import com.example.afetprojesi.service.clients.ApiUtils
 
-class DebrisHelpAddViewModel  : ViewModel(){
+class WreckageHelpAddViewModel  : ViewModel(){
 
     val data = MutableLiveData<Result?>()
 
     val error = MutableLiveData<ValidationExceptionResult>();
 
 
-    fun addDebrisHelp(dto : DebrisHelpDto){
+    fun addDebrisHelp(dto : WreckageHelpDto){
 
         val debrisHelpService = ApiUtils.getDebrisHelpService()
         debrisHelpService.addDebrisHelp(dto).enqueue(object : Callback<Result> {

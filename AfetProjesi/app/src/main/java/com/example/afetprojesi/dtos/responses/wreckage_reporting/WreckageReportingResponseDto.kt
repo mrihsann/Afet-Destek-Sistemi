@@ -1,9 +1,9 @@
-package com.example.afetprojesi.dtos.responses.reportingDebris
+package com.example.afetprojesi.dtos.responses.wreckage_reporting
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class ReportingDebrisResponseDto(
+data class WreckageReportingResponseDto(
     @Expose
     @SerializedName("id")
     var id:Int,

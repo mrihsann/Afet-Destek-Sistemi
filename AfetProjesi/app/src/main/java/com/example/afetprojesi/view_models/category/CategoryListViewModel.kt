@@ -1,4 +1,4 @@
-package com.example.afetprojesi.viewModels.category
+package com.example.afetprojesi.view_models.category
 
 import android.annotation.SuppressLint
 import android.util.Log

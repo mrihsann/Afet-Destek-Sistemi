@@ -1,6 +1,6 @@
-package com.example.afetprojesi.dtos.requests.debrisHelp
+package com.example.afetprojesi.dtos.requests.wreckage_help
 
-data class DebrisHelpDto(
+data class WreckageHelpDto(
     var name:String,
     var surname : String,
     var city : String,

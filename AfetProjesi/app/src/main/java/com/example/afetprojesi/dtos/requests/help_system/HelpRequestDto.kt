@@ -1,6 +1,8 @@
-package com.example.afetprojesi.dtos.requests.request
+package com.example.afetprojesi.dtos.requests.help_system
 
-data class RequestAddDto(
+import com.example.afetprojesi.dtos.enum_class.Status
+
+data class HelpRequestDto(
     var tc :String,
     var name : String,
     var surname : String,
