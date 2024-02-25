@@ -1,5 +1,6 @@
 package com.example.afetprojesi.viewModels.category
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.afetprojesi.dtos.responses.categories.CategoryResponseDto
@@ -24,7 +25,10 @@ class CategoryByIdViewModel : ViewModel() {
         val categoryService = ApiUtils.getCategoryService()
         categoryService.getCategoryById(id).enqueue(object  :
             Callback<DataResult<CategoryResponseDto>> {
-            override fun onFailure(call: Call<DataResult<CategoryResponseDto>>?, t: Throwable?) {}
+            override fun onFailure(call: Call<DataResult<CategoryResponseDto>>?, t: Throwable?) {
+                Log.e("server_hata",t?.message.toString())
+
+            }
 
             override fun onResponse(
                 call: Call<DataResult<CategoryResponseDto>>?,
@@ -33,11 +37,15 @@ class CategoryByIdViewModel : ViewModel() {
                 val result = response?.body()
                 if (result !=null){
                     data.value = response.body()
+                    Log.e("id_kat",response.body().toString())
 
                 }else{
                     val errorBody = response?.errorBody()?.string()
                     val resultError = Gson().fromJson(errorBody, Result::class.java)
                     error.value = resultError
+
+                    Log.d("hata_aldın",resultError.toString())
+
                 }
 
             }

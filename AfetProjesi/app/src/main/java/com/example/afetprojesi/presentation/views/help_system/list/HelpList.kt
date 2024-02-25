@@ -1,5 +1,6 @@
 package com.example.afetprojesi.presentation.views.help_system.list
 
+import android.util.Log
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
@@ -29,6 +30,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
@@ -36,6 +38,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.afetprojesi.presentation.views.general_ui.FilterChipFun
+import com.example.afetprojesi.viewModels.category.CategoryListViewModel
+import com.example.afetprojesi.viewModels.request.RequestListViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,8 +51,10 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
     //seçili filtreler burada tutuluyor, seçilen filtrelere göre listeleme yapacağız.
     val selectedFilters = remember { mutableListOf<String>() }
 
-    /*TODO(buraya apiden kategoriler gelecek ve buraya eklenecek.)*/
-    val listFilter = remember{ mutableListOf("") }
+
+    val listFilter = CategoryListViewModel().data.observeAsState()
+    val listRequest = RequestListViewModel().data.observeAsState()
+
 
     Scaffold(
         topBar = {
@@ -102,10 +108,12 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
                 Row(
                     modifier = Modifier.horizontalScroll(rememberScrollState())
                 ) {
-                    listFilter.forEach {
-                        FilterChipFun(it,selectedFilters)
+                    listFilter.value?.data?.forEach {
+                        FilterChipFun(it.name,selectedFilters)
+                        Log.d("kategori",it.name)
                         Spacer(modifier = Modifier.width(5.dp))
                     }
+                }
                 }
             }
 
@@ -115,4 +123,3 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
 
         }
     }
-}

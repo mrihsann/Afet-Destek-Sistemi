@@ -1,6 +1,7 @@
 package com.example.afetprojesi.viewModels.category
 
 import android.annotation.SuppressLint
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.afetprojesi.dtos.responses.categories.CategoryResponseDto
@@ -32,7 +33,12 @@ class CategoryListViewModel: ViewModel() {
                 val result = response?.body()
                 if (result != null){
                     data.value = result
+
+                    Log.wtf("kategoriess",result.message)
                 }
+
+                Log.wtf("hata_aldın_bebeyim",response?.errorBody().toString())
+
 
             }
         })

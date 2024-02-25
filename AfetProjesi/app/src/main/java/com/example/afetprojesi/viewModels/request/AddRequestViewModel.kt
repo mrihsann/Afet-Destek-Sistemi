@@ -31,7 +31,6 @@ class AddRequestViewModel : ViewModel() {
                 if (result!=null){
                     data.value = result
                 }
-
                 else{
                     val errorBody = response?.errorBody()?.string()
                     val resultError = Gson().fromJson(errorBody, ValidationExceptionResult::class.java)
