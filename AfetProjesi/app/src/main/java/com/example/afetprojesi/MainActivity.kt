@@ -18,8 +18,8 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.afetprojesi.dtos.requests.help_system.HelpRequestDto
 import com.example.afetprojesi.dtos.enum_class.Status
 import com.example.afetprojesi.ui.theme.AfetProjesiTheme
-import com.example.afetprojesi.view_models.category.CategoryByIdViewModel
-import com.example.afetprojesi.view_models.help_request.HelpRequestAddViewModel
+import com.example.afetprojesi.presentation.view_models.category.CategoryByIdViewModel
+import com.example.afetprojesi.presentation.view_models.help_system.HelpSystemAddViewModel
 
 
 class MainActivity : ComponentActivity() {
@@ -32,79 +32,9 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
-                    AddRequest()
-
-           /*         HelpList(
-                        onNavigateToHomePage = { *//*TODO*//* },
-                        onNavigateToDetail = { *//*TODO*//* }) {
-                    }*/
+                    Navigation()
                 }
             }
         }
     }
-
-
-
 }
-
-@Composable
-fun AddRequest(){
-
-    val vm : HelpRequestAddViewModel = viewModel()
-    val data = vm.data.observeAsState()
-    val error = vm.error.observeAsState()
-
-
-    Log.e("request_add_main",data.value.toString())
-    Log.e("request_error_main",error.value?.data.toString())
-
-    vm.addRequest(HelpRequestDto(
-        tc = "40514455928",
-        name = "ihsan",
-        surname = "arslan",
-        description = "Çok yakışıklıyım başım belada mı",
-        birthDay = 2000,
-        categoryId = 2,
-        city = "Malatya",
-        district = "Battalgazi",
-        locationDescription = "beni soracak olursanız şinelin yanındayım",
-        neighbourhood = "Şinel mahallesi",
-        phone = "05314576531",
-        status = Status.SUCCESS,
-        street = "Şinel caddesi"
-
-    ))
-
-    Text(text = "${data.value?.message}")
-    Text(text = "${error.value?.data.toString()}")
-
-}
-
-
-
-@Composable
-fun Sayfa(){
-    val viewModel : CategoryByIdViewModel = viewModel()
-
-    val result = viewModel.data.observeAsState()
-
-    val  error = viewModel.error.observeAsState()
-
-    viewModel.getById(1)
-
-    Column(verticalArrangement = Arrangement.SpaceEvenly, horizontalAlignment = Alignment.CenterHorizontally){
-        Text(text = "${result.value?.data?.name}")
-        Text(text = "${result.value?.success}")
-        Text(text = "${result.value?.message}")
-
-        if (error.value != null){
-            Text(text = "${error.value?.message}")
-            Text(text = "${error.value?.success}")
-        }
-
-    }
-
-}
-
-

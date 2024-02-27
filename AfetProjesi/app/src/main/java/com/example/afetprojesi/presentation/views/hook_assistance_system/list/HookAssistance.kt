@@ -27,22 +27,26 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.afetprojesi.presentation.view_models.category.CategoryListViewModel
 import com.example.afetprojesi.presentation.views.general_ui.FilterChipFun
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HookAssistance(onNavigateToHomePage: () -> Unit, onNavigateToDetail:() -> Unit, onNavigateToForm:() -> Unit) {
+fun HookAssistance(navController: NavController) {
 
     //filtreler kısmını açan butonun aktifliği burada kontrol ediliyor.
     val selectedFilter = remember { mutableStateOf(false) }
 
-    /*TODO("apiden kategori listesi çekilecek ve bu listeye eklenecek")*/
-    val namesFilter = remember{ mutableListOf("") }
+    val viewModelCategoryList : CategoryListViewModel = viewModel()
+    val namesFilter = viewModelCategoryList.data.observeAsState()
 
     //filtre seçildiği zaman buraya kaydediyoruz
     val selectedFilters = remember { mutableListOf<String>() }
@@ -58,7 +62,7 @@ fun HookAssistance(onNavigateToHomePage: () -> Unit, onNavigateToDetail:() -> Un
                     Text("Hook Assistance")
                 },
                 navigationIcon = {
-                    IconButton(onClick = onNavigateToHomePage) {
+                    IconButton(onClick = { navController.navigate("home_page") }) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 },
@@ -75,7 +79,7 @@ fun HookAssistance(onNavigateToHomePage: () -> Unit, onNavigateToDetail:() -> Un
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = onNavigateToForm, containerColor =  Color(0xFF282828), contentColor = Color.White) {
+            FloatingActionButton(onClick = {navController.navigate("hanger_form")}, containerColor =  Color(0xFF282828), contentColor = Color.White) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "" )
             }
         }
@@ -100,8 +104,8 @@ fun HookAssistance(onNavigateToHomePage: () -> Unit, onNavigateToDetail:() -> Un
                 Row(
                     modifier = Modifier.horizontalScroll(rememberScrollState())
                 ) {
-                    namesFilter.forEach {
-                        FilterChipFun(it,selectedFilters)
+                    namesFilter.value?.data?.forEach {
+                        FilterChipFun(it.name,selectedFilters)
                         Spacer(modifier = Modifier.width(5.dp))
                     }
                 }

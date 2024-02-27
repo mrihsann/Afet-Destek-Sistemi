@@ -48,12 +48,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.example.afetprojesi.R
 import com.example.afetprojesi.presentation.views.hook_assistance_system.detail.ImageCardDetail
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailWreckage(onNavigateToPopBack:() -> Unit,onNavigateToReportTeam:() -> Unit){
+fun DetailWreckage(navController: NavController){
 
     /*
     TODO(seçilen yardım kartının detayları burada görünecek, detayları ilgili değişkenlere ata)
@@ -77,7 +78,7 @@ fun DetailWreckage(onNavigateToPopBack:() -> Unit,onNavigateToReportTeam:() -> U
                     Text("Details", fontWeight = FontWeight.Bold, fontSize = 25.sp)
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onNavigateToPopBack()}) {
+                    IconButton(onClick = { navController.popBackStack()}) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 }
@@ -171,7 +172,7 @@ fun DetailWreckage(onNavigateToPopBack:() -> Unit,onNavigateToReportTeam:() -> U
 
             }
             Spacer(modifier = Modifier.height(15.dp))
-            OutlinedButton(onClick = { onNavigateToReportTeam() }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(3.dp)) {
+            OutlinedButton(onClick = { navController.navigate("wreckage_report_team") }, modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(3.dp)) {
                 Text(text = "Go Help", fontWeight = FontWeight.Bold, fontSize = 20.sp, color =  Color(0xFF282828))
             }
             /*

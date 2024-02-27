@@ -1,4 +1,4 @@
-package com.example.afetprojesi.view_models.wreckage_help
+package com.example.afetprojesi.presentation.view_models.wreckage_system
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

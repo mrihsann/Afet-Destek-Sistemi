@@ -36,15 +36,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.afetprojesi.R
 import com.example.afetprojesi.presentation.views.general_ui.FilterChipFun
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ListOfWreckages(onNavigateToHomePage: () -> Unit,onNavigateToReportWreckagePage: () -> Unit,onNavigateToDetail:() -> Unit) {
-
-    //filtre butonu aktifliği buradan ayarlanıyor
-    val selectedFilter = remember { mutableStateOf(false) }
+fun ListOfWreckages(navController: NavController) {
 
     //seçilen filtreler buraya geliyor
     val selectedFilters = remember { mutableListOf<String>() }
@@ -64,18 +62,8 @@ fun ListOfWreckages(onNavigateToHomePage: () -> Unit,onNavigateToReportWreckageP
                     Text("Wreckages")
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onNavigateToHomePage()}) {
+                    IconButton(onClick = { navController.navigate("home_page")}) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
-                    }
-                },
-                actions = {
-
-                    IconButton(onClick = { selectedFilter.value = !selectedFilter.value }) { // Tersine çevirme işlemi
-                        if (selectedFilter.value) {
-                            Icon(Icons.Filled.FilterAltOff, contentDescription = "More Vert", tint = Color.White)
-                        } else {
-                            Icon(Icons.Filled.FilterAlt, contentDescription = "More Vert", tint = Color.White)
-                        }
                     }
                 },
             )
@@ -83,7 +71,7 @@ fun ListOfWreckages(onNavigateToHomePage: () -> Unit,onNavigateToReportWreckageP
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    onNavigateToReportWreckagePage()
+                    navController.navigate("wreckage_form")
                 },
                 content = {
                     Icon(imageVector = Icons.Default.Add, contentDescription = null)
@@ -100,30 +88,6 @@ fun ListOfWreckages(onNavigateToHomePage: () -> Unit,onNavigateToReportWreckageP
                 .padding(start = 20.dp, end = 20.dp)
                 .fillMaxSize()
         ) {
-            //filtreler animasyon ile açılıp kapanıyor
-            AnimatedVisibility(
-                visible = selectedFilter.value,
-                enter = fadeIn(
-                    animationSpec = tween(durationMillis = 500, delayMillis = 250)
-                ),
-                exit = fadeOut(
-                    animationSpec = tween(durationMillis = 500, delayMillis = 250)
-                )
-            ) {
-                Column {
-                    Spacer(modifier = Modifier.height(10.dp))
-                    Row(
-                        modifier = Modifier.horizontalScroll(rememberScrollState())
-                    ) {
-                        namesFilter.forEach {
-                            FilterChipFun(it,selectedFilters)
-                            Spacer(modifier = Modifier.width(5.dp))
-                        }
-                    }
-                }
-
-            }
-
             /*
             TODO(apiden gelecek enkazlar burada listelenecek, bunun için SharingCard kullanılacak)
              */

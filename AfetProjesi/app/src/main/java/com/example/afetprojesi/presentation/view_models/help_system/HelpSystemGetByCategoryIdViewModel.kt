@@ -1,4 +1,4 @@
-package com.example.afetprojesi.view_models.help_request
+package com.example.afetprojesi.presentation.view_models.help_system
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,15 +9,14 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HelpRequestListViewModel : ViewModel() {
+class HelpSystemGetByCategoryIdViewModel : ViewModel() {
 
     val data = MutableLiveData<DataResult<List<HelpRequestResponseDto>>?>()
 
 
-    fun getAllRequests(){
+    fun getRequestByCategoryId(id : Int){
         val requestService = ApiUtils.getRequestService()
-
-        requestService.getAllRequests().enqueue(object :
+        requestService.getDetailsByCategoryId(id).enqueue(object :
             Callback<DataResult<List<HelpRequestResponseDto>>> {
             override fun onFailure(
                 call: Call<DataResult<List<HelpRequestResponseDto>>>?,
@@ -29,15 +28,14 @@ class HelpRequestListViewModel : ViewModel() {
                 response: Response<DataResult<List<HelpRequestResponseDto>>>?
             ) {
                 val result = response?.body()
-
                 if (result != null){
-                    data.value =result
+                    data.value = result
                 }
+
             }
         })
+
     }
 
-    init {
-        getAllRequests()
-    }
+
 }

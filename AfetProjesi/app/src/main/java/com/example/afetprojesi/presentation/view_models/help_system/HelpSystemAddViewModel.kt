@@ -1,4 +1,4 @@
-package com.example.afetprojesi.view_models.help_request
+package com.example.afetprojesi.presentation.view_models.help_system
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -11,7 +11,7 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class HelpRequestAddViewModel : ViewModel() {
+class HelpSystemAddViewModel : ViewModel() {
 
     val data = MutableLiveData<Result?>()
 

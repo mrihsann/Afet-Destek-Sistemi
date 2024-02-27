@@ -4,22 +4,21 @@ import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.core.TweenSpec
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.Message
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
-import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.afetprojesi.presentation.view_models.category.CategoryListViewModel
+import com.example.afetprojesi.presentation.view_models.help_system.HelpSystemAddViewModel
+import com.example.afetprojesi.presentation.views.general_ui.AlertDialogForm
 import com.example.afetprojesi.presentation.views.general_ui.SurveyBottomBar
 import com.example.afetprojesi.presentation.views.general_ui.SurveyTopBar
 import com.example.afetprojesi.presentation.views.general_ui.DescriptionInfo
@@ -28,7 +27,26 @@ import com.example.afetprojesi.presentation.views.general_ui.SelectCategoryPage
 import com.example.afetprojesi.util.getTransitionDirection
 
 @Composable
-fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
+fun HelpFormScreen(navController: NavController) {
+
+    val viewModel : HelpSystemAddViewModel = viewModel()
+
+
+    /* TODO(mernis sorgulama ve veriyi gönderirken ekrana gelen uyarıyı gösterme kısmı ayarlanacak) */
+    val openAlertDialog = remember { mutableStateOf(false) }
+
+    when {
+        openAlertDialog.value ->
+            {
+            AlertDialogForm(
+                onDismissRequest = { openAlertDialog.value=false },
+                onConfirmation = { openAlertDialog.value=false },
+                dialogTitle = "",
+                dialogText ="",
+                icon = Icons.AutoMirrored.Default.Message)
+        }
+    }
+
 
     // Sayfa değişimi sırasında, mevcut sayfanın konumunu burada tutuyoruz
     val currentPageIndex = remember { mutableIntStateOf(0) }
@@ -48,6 +66,7 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
     val tc = remember { mutableStateOf("") }
     val name = remember { mutableStateOf("") }
     val surname = remember { mutableStateOf("") }
+    val birthday = remember { mutableStateOf("") }
     val number = remember { mutableStateOf("") }
     val description = remember { mutableStateOf("") }
     val city = remember { mutableStateOf("") }
@@ -69,8 +88,10 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
                 neighbourhood.value.isEmpty() or
                 street.value.isEmpty() or
                 locationNot.value.isEmpty())
-    /*TODO(buraya apiden kategoriler gelecek ve buraya eklenecek.)*/
-    val listCategory = remember{ mutableListOf("") }
+
+
+    val viewModelCategoryList : CategoryListViewModel = viewModel()
+    val listCategory = viewModelCategoryList.data.observeAsState()
 
     val totalPageCount=4
 
@@ -80,7 +101,7 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
             SurveyTopBar(
                 questionIndex = currentPageIndex.intValue,
                 totalQuestionsCount = totalPageCount,
-                onClosePressed = {onNavigateToHomePage()},
+                onClosePressed = {navController.navigate("home_page")},
             )
         },
         bottomBar = {
@@ -129,7 +150,27 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
 
                 },
                 onDonePressed = {
-                    /*TODO(formu tamamlama butonuna tıklandığı zaman yapılacak işlemler burada olacak.)*/
+                    openAlertDialog.value=true
+                    /* TODO(ekleme işlemi yapılacağı zaman burada ekrana bir uyarı vereceğiz ve ekranda durum bilgisi yazacak, eklenip eklenmediği veya hata verip vermediği.) */
+                    /*
+
+                    viewModel.addRequest(
+                        HelpRequestDto(
+                        tc = tc.value,
+                        name = name.value,
+                        surname = surname.value,
+                        description = description.value,
+                        birthDay = birthday.value,
+                        categoryId = selectedCategoryList.lastIndex,
+                        city = city.value,
+                        district = district.value,
+                        locationDescription = locationNot.value,
+                        neighbourhood = neighbourhood.value,
+                        phone = number.value,
+                        status = Status.SUCCESS,
+                        street = street.value
+                    )
+                    )*/
                 }
             )
         }
@@ -160,10 +201,10 @@ fun HelpFormScreen(onNavigateToHomePage: () -> Unit) {
             when (animatedContentScope) {
                 //sayfa indisine göre hangi sayfanın açılacağını sağlıyoruz
                 0 -> {
-                    PersonalInfoHelpPage(tc = tc, name = name, surname = surname,number=number,paddingValues=paddingValues)
+                    PersonalInfoHelpPage(tc = tc, name = name, surname = surname, birthday = birthday,number=number,paddingValues=paddingValues)
                 }
                 1 -> {
-                    SelectCategoryPage(listCategory = listCategory,
+                    SelectCategoryPage(listCategory = listCategory.value?.data,
                         selectedCategoryList=selectedCategoryList,
                         paddingValues=paddingValues)
                 }

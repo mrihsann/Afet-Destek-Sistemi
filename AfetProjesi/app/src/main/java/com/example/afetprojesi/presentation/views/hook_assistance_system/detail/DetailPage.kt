@@ -41,11 +41,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailPage(onNavigateToPopBack:() -> Unit){
+fun DetailPage(navController: NavController){
 
     /*
     TODO(seçilen yardım kartının detayları burada görünecek, detayları ilgili değişkenlere ata)
@@ -70,7 +71,7 @@ fun DetailPage(onNavigateToPopBack:() -> Unit){
                     Text("Details", fontWeight = FontWeight.Bold, fontSize = 25.sp)
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onNavigateToPopBack()}) {
+                    IconButton(onClick = { navController.popBackStack()}) {
                         Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 }

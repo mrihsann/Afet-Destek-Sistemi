@@ -13,6 +13,7 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
@@ -20,6 +21,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
+import com.example.afetprojesi.presentation.view_models.category.CategoryListViewModel
 import com.example.afetprojesi.presentation.views.general_ui.ErrorFormPage
 import com.example.afetprojesi.presentation.views.general_ui.SurveyBottomBar
 import com.example.afetprojesi.presentation.views.general_ui.SurveyTopBar
@@ -29,7 +33,7 @@ import com.example.afetprojesi.util.getTransitionDirection
 
 @Composable
 fun HookAssistanceForm(
-    onNavigateToHomePage: () -> Unit
+    navController: NavController
 ) {
 
     // sayfa geçişlerinde, bulunduğumuz sayfanın index bilgisini burada tutuyoruz.
@@ -57,8 +61,8 @@ fun HookAssistanceForm(
     val surname= remember { mutableStateOf("") }
     val phoneNumber= remember { mutableStateOf("") }
 
-    /*TODO(buraya apiden kategoriler gelecek ve buraya eklenecek.)*/
-    val listCategory = remember{ mutableListOf("") }
+    val viewModelCategoryList : CategoryListViewModel = viewModel()
+    val listCategory = viewModelCategoryList.data.observeAsState()
 
 
     isDoneButtonEnabled.value =
@@ -78,7 +82,7 @@ fun HookAssistanceForm(
             SurveyTopBar(
                 questionIndex = currentPageIndex.intValue,
                 totalQuestionsCount = 5,
-                onClosePressed = onNavigateToHomePage,
+                onClosePressed = {navController.navigate("home_page")},
             )
         },
         bottomBar = {
@@ -154,7 +158,7 @@ fun HookAssistanceForm(
         ){ animatedContentScope ->
             when (animatedContentScope) {
                 0 -> {
-                    SelectCategoryPage(listCategory = listCategory,selectedCategoryList=selectedCategoryList, paddingValues=paddingValues)
+                    SelectCategoryPage(listCategory = listCategory.value?.data,selectedCategoryList=selectedCategoryList, paddingValues=paddingValues)
                 }
                 1 -> {
                     PhotoPicker(selectedImageUris,paddingValues)

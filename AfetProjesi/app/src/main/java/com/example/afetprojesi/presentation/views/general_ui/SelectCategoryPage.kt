@@ -10,10 +10,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.example.afetprojesi.dtos.responses.categories.CategoryResponseDto
 
 //kategori seçimi yapılan sayfa
 @Composable
-fun SelectCategoryPage(listCategory:MutableList<String>,selectedCategoryList:MutableList<String>,paddingValues: PaddingValues){
+fun SelectCategoryPage(listCategory:List<CategoryResponseDto>?, selectedCategoryList:MutableList<String>, paddingValues: PaddingValues){
     Column(
         modifier = Modifier
             .padding(paddingValues)
@@ -23,8 +24,8 @@ fun SelectCategoryPage(listCategory:MutableList<String>,selectedCategoryList:Mut
         Spacer(Modifier.height(32.dp))
         QuestionTitle(title = "Select a Category")
         Spacer(Modifier.height(18.dp))
-        listCategory.forEach {
-            ChoiceCategoryCard(it,selectedCategoryList)
+        listCategory?.forEach {
+            ChoiceCategoryCard(it.name,selectedCategoryList)
         }
     }
 }

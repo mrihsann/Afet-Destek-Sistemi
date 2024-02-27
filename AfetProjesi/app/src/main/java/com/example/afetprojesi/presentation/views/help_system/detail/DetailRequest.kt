@@ -34,28 +34,32 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.afetprojesi.presentation.view_models.help_system.HelpSystemGetByIdViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun DetailRequest(onNavigateToPopBack:() -> Unit){
+fun DetailRequest(onNavigateToPopBack:() -> Unit,id:String?){
 
-    /*
-    TODO(seçilen yardım kartının detayları burada görünecek, detayları ilgili değişkenlere ata)
+    /* TODO(viewmodelden veriyi çekemiyoruz hata veriyor) */
+    val viewModel: HelpSystemGetByIdViewModel = viewModel()
+    viewModel.getByRequestTc(id!!)
+    val data=viewModel.data.observeAsState()
+    val dataa=data.value?.data
 
-     */
-
-    val name=""
-    val description=""
-    val city=""
-    val district=""
-    val neighbourhood=""
-    val street=""
-    val locationNot=""
+    val name= dataa?.name+" "+dataa?.surname
+    val description=dataa?.description
+    val city=dataa?.city
+    val district=dataa?.district
+    val neighbourhood=dataa?.neighbourhood
+    val street=dataa?.street
+    val locationNot=dataa?.locationDescription
 
 
     Scaffold(
@@ -123,10 +127,11 @@ fun DetailRequest(onNavigateToPopBack:() -> Unit){
             Text(text = name, fontSize = 25.sp, fontWeight = FontWeight.Bold)
             Spacer(modifier = Modifier.height(15.dp))
             OutlinedCard {
-                Text(
-                    text = description
-                    , fontSize = 20.sp, color = Color.DarkGray,modifier=Modifier.padding(10.dp)
-                )
+                if (description != null) {
+                    Text(
+                        text = description, fontSize = 20.sp, color = Color.DarkGray,modifier=Modifier.padding(10.dp)
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.height(20.dp))
@@ -135,27 +140,38 @@ fun DetailRequest(onNavigateToPopBack:() -> Unit){
                 .horizontalScroll(rememberScrollState())
             ){
                 OutlinedCard {
-                    Text(text = city, fontSize = 15.sp, modifier = Modifier.padding(5.dp))
+                    if (city != null) {
+                        Text(text = city, fontSize = 15.sp, modifier = Modifier.padding(5.dp))
+                    }
                 }
                 Spacer(modifier = Modifier.width(10.dp))
                 OutlinedCard {
-                    Text(text = district, fontSize = 15.sp,modifier = Modifier.padding(5.dp))
+                    if (district != null) {
+                        Text(text = district, fontSize = 15.sp,modifier = Modifier.padding(5.dp))
+                    }
                 }
                 Spacer(modifier = Modifier.width(10.dp))
                 OutlinedCard {
-                    Text(text = neighbourhood, fontSize = 15.sp,modifier = Modifier.padding(5.dp))
+                    if (neighbourhood != null) {
+                        Text(text = neighbourhood, fontSize = 15.sp,modifier = Modifier.padding(5.dp))
+                    }
                 }
                 Spacer(modifier = Modifier.width(10.dp))
                 OutlinedCard {
-                    Text(text = street, fontSize = 15.sp,modifier = Modifier.padding(5.dp))
+                    if (street != null) {
+                        Text(text = street, fontSize = 15.sp,modifier = Modifier.padding(5.dp))
+                    }
                 }
             }
             Spacer(modifier = Modifier.height(20.dp))
 
             OutlinedCard(modifier = Modifier.fillMaxWidth()) {
                 Text(text = "Location Not :", modifier = Modifier.padding(10.dp))
-                Text(text = locationNot, modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 10.dp), fontSize = 18.sp, color = Color.DarkGray)
+                if (locationNot != null) {
+                    Text(text = locationNot, modifier = Modifier.padding(start = 10.dp, end = 10.dp, bottom = 10.dp), fontSize = 18.sp, color = Color.DarkGray)
+                }
             }
         }
+
     }
 }

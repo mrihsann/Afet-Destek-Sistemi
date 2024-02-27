@@ -19,6 +19,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.afetprojesi.presentation.views.general_ui.DescriptionInfo
 import com.example.afetprojesi.presentation.views.general_ui.ErrorFormPage
 import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
@@ -32,7 +33,7 @@ import com.example.afetprojesi.util.getTransitionDirection
 
 @Composable
 fun ReportWreckageScreen(
-    onNavigateToHomePage: () -> Unit
+    navController: NavController
 ) {
 
     // Sayfa değişimi için bir state değişkeni tanımlayalım
@@ -87,7 +88,7 @@ fun ReportWreckageScreen(
             SurveyTopBar(
                 questionIndex = currentPageIndex.intValue,
                 totalQuestionsCount = totalPageCount,
-                onClosePressed = onNavigateToHomePage,
+                onClosePressed = {navController.navigate("home_page")},
             )
         },
         bottomBar = {

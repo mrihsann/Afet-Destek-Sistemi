@@ -18,6 +18,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntOffset
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.example.afetprojesi.presentation.views.general_ui.DescriptionInfo
 import com.example.afetprojesi.presentation.views.general_ui.ErrorFormPage
 import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
@@ -28,7 +29,7 @@ import com.example.afetprojesi.util.getTransitionDirection
 
 
 @Composable
-fun GoHelpToWreckage() {
+fun GoHelpToWreckage(navController: NavController) {
 
     // Sayfa değişimi için bir state değişkeni tanımlayalım
     val currentPageIndex = remember { mutableIntStateOf(0) }
@@ -70,7 +71,7 @@ fun GoHelpToWreckage() {
             SurveyTopBar(
                 questionIndex = currentPageIndex.intValue,
                 totalQuestionsCount = totalPageCount,
-                onClosePressed = {/* buraya enkaz listesi sayfasına giden fonksiyon gelecek */},
+                onClosePressed = {navController.popBackStack()},
             )
         },
         bottomBar = {

@@ -10,12 +10,14 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.FilterAlt
 import androidx.compose.material.icons.filled.FilterAltOff
 import androidx.compose.material3.Icon
@@ -33,13 +35,15 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.example.afetprojesi.presentation.views.general_ui.FilterChipFun
-import com.example.afetprojesi.view_models.category.CategoryListViewModel
-import com.example.afetprojesi.view_models.help_request.HelpRequestListViewModel
+import com.example.afetprojesi.presentation.view_models.category.CategoryListViewModel
+import com.example.afetprojesi.presentation.view_models.help_system.HelpSystemListViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onNavigateToHelpForm: () -> Unit) {
+fun HelpList(navController: NavController) {
 
     //filtreler kısmını açan butonunu aktifliği burada kontrol ediliyor.
     val selectedFilter = remember { mutableStateOf(false) }
@@ -48,8 +52,11 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
     val selectedFilters = remember { mutableListOf<String>() }
 
 
-    val listFilter = CategoryListViewModel().data.observeAsState()
-    val listRequest = HelpRequestListViewModel().data.observeAsState()
+    val viewModelHelpSystemList : HelpSystemListViewModel = viewModel()
+    val viewModelCategoryList : CategoryListViewModel = viewModel()
+    val listFilter = viewModelCategoryList.data.observeAsState()
+    val listRequest = viewModelHelpSystemList.data.observeAsState()
+    val data = listRequest.value?.data?.toList()
 
 
     Scaffold(
@@ -63,8 +70,8 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
                     Text("Help List")
                 },
                 navigationIcon = {
-                    IconButton(onClick = { onNavigateToHomePage()}) {
-                        Icon(Icons.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
+                    IconButton(onClick = { navController.navigate("home_page")}) {
+                        Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back", tint = Color.White)
                     }
                 },
                 actions = {
@@ -80,7 +87,7 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
             )
         },
         floatingActionButton = {
-            FloatingActionButton(onClick = { onNavigateToHelpForm() }, containerColor = Color(0xFF282828), contentColor = Color.White) {
+            FloatingActionButton(onClick = { navController.navigate("help_form") }, containerColor = Color(0xFF282828), contentColor = Color.White) {
                 Icon(imageVector = Icons.Default.Add, contentDescription = "")
             }
         }
@@ -91,6 +98,7 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
                 .padding(start = 15.dp, end = 15.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
+
             //filtreler kısmını animasyonlu şekilde açıp kapatıyoruz
             AnimatedVisibility(
                 visible = selectedFilter.value,
@@ -106,16 +114,26 @@ fun HelpList(onNavigateToHomePage: () -> Unit,onNavigateToDetail: () -> Unit,onN
                 ) {
                     listFilter.value?.data?.forEach {
                         FilterChipFun(it.name,selectedFilters)
-                        Log.d("kategori",it.name)
                         Spacer(modifier = Modifier.width(5.dp))
                     }
                 }
+            }
+            LazyColumn{
+                if (data != null) {
+                    items(data.size){
+                        Spacer(modifier = Modifier.height(10.dp))
+                        HelpCard(
+                            onNavigateToDetail = { navController.navigate("help_detail/"+(it+1)) },
+                            name = data[it].name+" "+data[it].surname,
+                            number = data[it].phone,
+                            description = data[it].description,
+                            location =data[it].city
+                        )
+                        Spacer(modifier = Modifier.height(5.dp))
+                    }
                 }
             }
-
-            /*
-            TODO(apiden çekilecek olan yardım talep verileri burada gösyterilecek.)
-             */
-
         }
+
     }
+}

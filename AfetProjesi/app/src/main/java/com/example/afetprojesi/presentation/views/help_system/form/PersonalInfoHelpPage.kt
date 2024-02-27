@@ -15,11 +15,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import com.example.afetprojesi.presentation.views.general_ui.QuestionTitle
 
 @Composable
-fun PersonalInfoHelpPage(tc: MutableState<String>, name: MutableState<String>, surname: MutableState<String>, number: MutableState<String>,paddingValues: PaddingValues){
+fun PersonalInfoHelpPage(tc: MutableState<String>, name: MutableState<String>, surname: MutableState<String>,birthday: MutableState<String>, number: MutableState<String>,paddingValues: PaddingValues){
     Column(
         modifier = Modifier
             .padding(paddingValues)
@@ -53,6 +54,23 @@ fun PersonalInfoHelpPage(tc: MutableState<String>, name: MutableState<String>, s
                 value = surname.value,
                 onValueChange = { surname.value = it },
                 label = { Text("Surname") }
+            )
+
+            OutlinedTextField(
+                modifier = Modifier.fillMaxWidth(),
+                value = birthday.value,
+                onValueChange = {
+                    if (birthday.value.length<4){
+                        birthday.value = it
+                    }
+                    else{
+                        birthday.value=""
+                    }
+                    },
+                label = { Text("Birthday Year (YYYY)") },
+                keyboardOptions = KeyboardOptions(
+                    keyboardType = KeyboardType.Number
+                )
             )
 
             OutlinedTextField(

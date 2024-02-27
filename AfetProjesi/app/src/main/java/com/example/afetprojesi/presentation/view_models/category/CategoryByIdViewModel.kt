@@ -1,4 +1,4 @@
-package com.example.afetprojesi.view_models.category
+package com.example.afetprojesi.presentation.view_models.category
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

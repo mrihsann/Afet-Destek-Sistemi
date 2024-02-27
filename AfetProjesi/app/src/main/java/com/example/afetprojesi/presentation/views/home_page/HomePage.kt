@@ -17,6 +17,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AddAlert
 import androidx.compose.material.icons.filled.Mail
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Surface
@@ -29,17 +30,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.afetprojesi.presentation.views.general_ui.AlertDialog
+import androidx.navigation.NavController
+import com.example.afetprojesi.presentation.views.general_ui.AlertDialogImage
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit, onNavigateToHookAssistanceForm: () -> Unit, onNavigateToHookAssistance: () -> Unit, onNavigateToReportWreckage: () -> Unit, onNavigateToWreckageList: () -> Unit){
+fun HomePage(navController: NavController){
     val openAlertDialog = remember { mutableStateOf(false) }
 
     Surface {
         when {
             openAlertDialog.value -> {
-                AlertDialog( openAlertDialog )
+                AlertDialogImage( openAlertDialog )
             }
         }
         Column(modifier = Modifier.fillMaxSize()) {
@@ -67,11 +70,11 @@ fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit,
                         OutlinedCard(modifier = Modifier
                             .height(120.dp)
                             .weight(1f)
-                            .padding(5.dp)
-                            .clickable { onNavigateToHelpForm() },
+                            .padding(5.dp),
                             colors = CardDefaults.cardColors(
                             containerColor = Color(0xFF282828)),
-                            shape = RoundedCornerShape(5.dp)
+                            shape = RoundedCornerShape(5.dp),
+                            onClick = { navController.navigate("help_form") }
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Text(text = "Request", fontSize = 20.sp, color = Color.White)
@@ -83,11 +86,11 @@ fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit,
                         OutlinedCard(modifier = Modifier
                             .height(120.dp)
                             .weight(1f)
-                            .padding(5.dp)
-                            .clickable { onNavigateToHelpList() },
+                            .padding(5.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = Color(0xFF282828)),
-                            shape = RoundedCornerShape(5.dp)
+                            shape = RoundedCornerShape(5.dp),
+                            onClick = { navController.navigate("help_list") }
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Text(text = "Requirement", fontSize = 20.sp, color = Color.White)
@@ -103,11 +106,11 @@ fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit,
                             .width(120.dp)
                             .height(120.dp)
                             .weight(1f)
-                            .padding(5.dp)
-                            .clickable { onNavigateToHookAssistanceForm() },
+                            .padding(5.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = Color(0xFF282828)),
-                            shape = RoundedCornerShape(5.dp)
+                            shape = RoundedCornerShape(5.dp),
+                            onClick = { navController.navigate("hanger_form") }
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Text(text = "Hook", fontSize = 18.sp, color = Color.White)
@@ -122,11 +125,11 @@ fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit,
                             .width(120.dp)
                             .height(120.dp)
                             .weight(1f)
-                            .padding(5.dp)
-                            .clickable { onNavigateToHookAssistance() },
+                            .padding(5.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = Color(0xFF282828)),
-                            shape = RoundedCornerShape(5.dp)
+                            shape = RoundedCornerShape(5.dp),
+                            onClick = { navController.navigate("hanger_list") }
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Text(text = "Hook", fontSize = 18.sp, color = Color.White)
@@ -144,13 +147,11 @@ fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit,
                             .width(120.dp)
                             .height(120.dp)
                             .weight(1f)
-                            .padding(5.dp)
-                            .clickable {
-                                onNavigateToReportWreckage()
-                            },
+                            .padding(5.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = Color(0xFF282828)),
-                            shape = RoundedCornerShape(5.dp)
+                            shape = RoundedCornerShape(5.dp),
+                            onClick = { navController.navigate("wreckage_form") }
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Text(text = "Report", fontSize = 20.sp, color = Color.White)
@@ -163,13 +164,11 @@ fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit,
                             .width(120.dp)
                             .height(120.dp)
                             .weight(1f)
-                            .padding(5.dp)
-                            .clickable {
-                                onNavigateToWreckageList()
-                            },
+                            .padding(5.dp),
                             colors = CardDefaults.cardColors(
                                 containerColor = Color(0xFF282828)),
-                            shape = RoundedCornerShape(5.dp)
+                            shape = RoundedCornerShape(5.dp),
+                            onClick = { navController.navigate("wreckage_list") }
                         ) {
                             Column (modifier = Modifier.fillMaxSize(),horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center){
                                 Text(text = "Wreckage", fontSize = 20.sp, color = Color.White)
@@ -187,7 +186,7 @@ fun HomePage(onNavigateToHelpForm: () -> Unit, onNavigateToHelpList: () -> Unit,
                             .weight(1f)
                             .padding(5.dp)
                             .clickable {
-                                openAlertDialog.value=true
+                                openAlertDialog.value = true
                             },
                             colors = CardDefaults.cardColors(
                                 containerColor = Color(0xFF282828)),

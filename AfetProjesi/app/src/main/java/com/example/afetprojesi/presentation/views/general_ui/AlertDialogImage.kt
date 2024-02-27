@@ -27,7 +27,7 @@ import androidx.compose.ui.window.Dialog
 TODO(Burası alarm sayfası, burası açıldığı zaman alarm sesi duyulacak ve buradan alarm sesi tekrardan kapatılacak.)
  */
 @Composable
-fun AlertDialog(
+fun AlertDialogImage(
     onDismissRequest: MutableState<Boolean>
 ) {
     Dialog({ onDismissRequest.value }) {
